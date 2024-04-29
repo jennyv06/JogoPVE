@@ -1,19 +1,39 @@
-function AdivinharNumero(numeroEscolhidoObj) {
-    var numeroEscolhidoObj = document.getElementById("numeroEscolhido")
+var numeroRandomizado = 0
+var resultadoObj = document.getElementById("resultado")
+
+function AdivinharNumero() {
+    let numeroEscolhidoObj = document.getElementById("numeroEscolhido")
     let numeroEscolhidoNum = numeroEscolhidoObj.value
 
-    let numeroRandomizado = RandomizarNumero(10);
-
-    if(numeroEscolhidoObj == numeroRandomizado) {
+    if(numeroEscolhidoNum == numeroRandomizado) {
         console.log("Acertou!")
+        resultadoObj.innerHTML = "<p>Acertou. Novo número mágico gerado!</p>"
+        RandomizarNumero()
+        
     } else {
-        console.log("Errou!")
+        resultadoObj.innerHTML = "<p>Errou."
+        if(numeroEscolhidoNum > numeroRandomizado)
+            resultadoObj.innerHTML += " O número mágico é menor!</p>"
+        else    
+            resultadoObj.innerHTML += " O número mágico é maior!</p>"
     }
-    console.log("Era "+numeroRandomizado)
+
+    console.log(numeroRandomizado)
 }
 
-function RandomizarNumero(max) {
-    let numeroAleatorio = Math.floor(Math.random() * max); 
+function RandomizarNumero() {
+    let dificuldadeObj = document.getElementById("dificuldade")
+    let dificuldadeNum = dificuldadeObj.value
 
-    return numeroAleatorio;
+    if(dificuldadeNum == 1) 
+        numeroRandomizado = Math.floor(Math.random() * 10); 
+    else if(dificuldadeNum == 2)
+        numeroRandomizado = Math.floor(Math.random() * 100); 
+    else if(dificuldadeNum ==3)
+        numeroRandomizado = Math.floor(Math.random() * 1000); 
+}
+
+function GerarNovoNumero() {
+    RandomizarNumero()
+    resultadoObj.innerHTML = "<p>Novo número mágico gerado</p>"
 }
